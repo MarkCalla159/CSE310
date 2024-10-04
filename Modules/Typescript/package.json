@@ -1,0 +1,25 @@
+{
+  "name": "appupdw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dest/app",
+    "dev": "nodemon dest/app"
+  },
+  "keywords": [],
+  "author": "Mark Calla - CSE310",
+  "license": "ISC",
+  "description": "Uploader and downloader app",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/multer": "^1.4.12",
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}

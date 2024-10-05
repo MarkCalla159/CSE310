@@ -4,6 +4,8 @@ import crypto from "crypto";
 import { Request, Response, NextFunction } from "express";
 import path from "path";
 //const uuid = crypto.randomUUID();
+
+//Storage Configuration
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "../../public/upload"),
   filename: function (
@@ -16,7 +18,7 @@ const storage = multer.diskStorage({
     cb(null, `${uuid}${fileExtension}`);
   },
 });
-
+//File Filter
 const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
   console.log("File received:", file.originalname);
   console.log("MIME type:", file.mimetype);
@@ -24,14 +26,14 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallb
 
   if (fileTypes.includes(file.mimetype)) {
     console.log("File accepted");
-    return cb(null, true);
+    return cb(null, true); // To reject the file
 } else {
     console.log("File rejected: Incorrect MIME type");
-    return cb(null, false);
+    return cb(null, false); // If we already know what the first one did, what do you think this one does?
 }
 };
 
-const maxSize = 10 * 1024 * 1024;
+const maxSize = 10 * 1024 * 1024; //Image max size
 
 export const upload = (req: Request, res: Response, next: NextFunction) => {
   return multer({

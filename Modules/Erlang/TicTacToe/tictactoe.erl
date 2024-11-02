@@ -1,22 +1,29 @@
 -module(tictactoe).
 
+% Export functions for creating a new game, making a play, and checking the game status
 -export([new/0, play/4, check/1]).
 
+% new/0 initializes a new Tic-Tac-Toe game board
 new() ->
     io:format("Starting a new game.~n"),
     {undefined, undefined, undefined,
      undefined, undefined, undefined,
      undefined, undefined, undefined}.
 
-play(Who, X, Y, Game) ->
-    Position = (Y - 1) * 3 + X,
-    UpdatedGame = setelement(Position, Game, Who),
+% play/4 takes a player (`Who`), coordinates (X, Y), and the current game state (Game)
+% and returns an updated game state with the new move
+play(Who, X, Y, Game) ->  % To calculate the linear position in the tuple based on (X, Y) coordinates
+    Position = (Y - 1) * 3 + X, % To place the player's mark (Who) in the specified position
+    UpdatedGame = setelement(Position, Game, Who), % To print the move made by the player
+
     io:format("Player ~p played at position (~p, ~p).~n", [Who, X, Y]),
     display_game(UpdatedGame),
     UpdatedGame.
 
+% check/1 examines the game state to determine if there’s a winner, draw, or if the game continues
 check(Game) ->
-    Result = 
+    Result =
+%Stretch Challenge Case Of 
         case Game of
             {x, x, x,
              _, _, _,
@@ -101,6 +108,7 @@ check(Game) ->
     end,
     Result.
 
+% display_game/1 displays the current game board in a formatted way
 display_game({A, B, C, D, E, F, G, H, I}) ->
     io:format("Game state:~n"),
     io:format("~p | ~p | ~p~n", [A, B, C]),
